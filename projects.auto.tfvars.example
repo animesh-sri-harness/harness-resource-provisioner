@@ -1,0 +1,38 @@
+# ------------------------------------------------------------------------------
+# Projects to provision
+#
+# Setup:
+#   cp projects.auto.tfvars.example projects.auto.tfvars
+#
+# Terraform automatically loads any file ending in .auto.tfvars.
+# To add a project, copy a block below and change the map key and name.
+#
+#   my_new_project = {
+#     name        = "My New Project"
+#     description = "Optional description"
+#     tags        = ["team:platform", "env:prod"]
+#   }
+# ------------------------------------------------------------------------------
+
+projects = {
+  platform_dev = {
+    name        = "Platform Dev"
+    description = "Development environment for platform tooling"
+    tags        = ["env:dev", "team:platform"]
+  }
+
+  platform_prod = {
+    name        = "Platform Prod"
+    description = "Production environment for platform tooling"
+    color       = "#36B37E"
+    tags        = ["env:prod", "team:platform"]
+  }
+
+  # Add more projects below:
+  #
+  # payments_service = {
+  #   name        = "Payments Service"
+  #   description = "Payments team delivery project"
+  #   tags        = ["team:payments", "env:prod"]
+  # }
+}

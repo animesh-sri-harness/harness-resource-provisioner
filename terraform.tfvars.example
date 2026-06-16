@@ -1,0 +1,32 @@
+# ------------------------------------------------------------------------------
+# Harness connection and organization settings
+#
+# Setup:
+#   cp terraform.tfvars.example terraform.tfvars
+#   cp projects.auto.tfvars.example projects.auto.tfvars
+#
+# Both files are gitignored. Never commit real credentials.
+# ------------------------------------------------------------------------------
+
+# --- Harness connection (Self-Managed) ---
+harness_endpoint         = "https://harness.example.com/gateway"
+harness_account_id       = "your_account_id"
+harness_platform_api_key = "your_platform_api_key"
+
+# ==============================================================================
+# Organization — choose ONE mode below
+# ==============================================================================
+
+# --- Mode A: Use an existing organization (recommended) ---
+create_org      = false
+existing_org_id = "default"
+
+# --- Mode B: Create a new organization (uncomment and comment out Mode A) ---
+# create_org = true
+#
+# org = {
+#   identifier  = "platform_engineering"
+#   name        = "Platform Engineering"
+#   description = "Shared platform and tooling organization"
+#   tags        = ["team:platform", "env:prod"]
+# }

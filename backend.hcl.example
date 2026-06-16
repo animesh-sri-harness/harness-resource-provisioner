@@ -1,0 +1,13 @@
+# ------------------------------------------------------------------------------
+# Remote state backend (S3 example)
+#
+# 1. Copy to backend.hcl and update values for your environment
+# 2. Uncomment backend "s3" {} in versions.tf
+# 3. Run: terraform init -reconfigure -backend-config=backend.hcl
+# ------------------------------------------------------------------------------
+
+bucket         = "my-company-terraform-state"
+key            = "harness-resource-provisioner/prod/terraform.tfstate"
+region         = "us-east-1"
+dynamodb_table = "terraform-state-lock"
+encrypt        = true

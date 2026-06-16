@@ -1,0 +1,49 @@
+name: Terraform
+
+on:
+  pull_request:
+    paths:
+      - "**/*.tf"
+      - "**/*.tfvars.example"
+      - ".github/workflows/terraform.yml"
+      - "Makefile"
+  push:
+    branches:
+      - main
+      - feature-1
+    paths:
+      - "**/*.tf"
+      - "**/*.tfvars.example"
+      - ".github/workflows/terraform.yml"
+      - "Makefile"
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Format and Validate
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.9.8
+
+      - name: Terraform Format Check
+        run: terraform fmt -check -recursive -diff .
+
+      - name: Create CI variable files
+        run: |
+          cp terraform.tfvars.example terraform.tfvars
+          cp projects.auto.tfvars.example projects.auto.tfvars
+
+      - name: Terraform Init
+        run: terraform init -backend=false
+
+      - name: Terraform Validate
+        run: terraform validate
